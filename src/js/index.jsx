@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default class Index extends React.Component {//类名必须大写，babelrc文件添加插件babel-plugin-transform-class-properties
+export default class Component extends React.Component {//类名必须大写，babelrc文件添加插件babel-plugin-transform-class-properties
 	static propTypes = {
 		name: React.PropTypes.string,
 	};
@@ -12,13 +12,14 @@ export default class Index extends React.Component {//类名必须大写，babel
 
 	render() {
 		return (
-		<div>
-		<h1>测试</h1>
-		</div>
-		);
+			<div className="wrap">
+					<p>这是标题</p>
+					<p>你好啊</p>
+			</div>
+			);
 	}
 }
 ReactDOM.render(
-<Index />,
-document.getElementById('app')
-);
+	<Component />,
+	document.getElementById('app')
+	);
