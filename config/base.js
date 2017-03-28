@@ -47,7 +47,7 @@ module.exports = {
 		},
 		module: { //处理不同类型文件的各种加载器
 			rules: [{//处理es6
-				test: /\.js[x]$/,
+				test: /\.js[x]?$/,
 				exclude: /(node_modules|bower_components)/,
 				use: {
 					loader: 'babel-loader'
@@ -57,14 +57,35 @@ module.exports = {
 				include:[path.resolve(__dirname,"../src/")],
 				use: css_extract.extract({
 					fallback: "style-loader",
-					use: ["css-loader","postcss-loader"]
+					use:[{
+						loader:"css-loader",
+						//是否需要一个全局默认样式或者一个自己自定义的样式？
+						//如果需要的话，就要exclude出去，因为该插件会扩展类名
+						//所以只要有类名就会进行转换，就不起作用了
+						options: {//模块化css
+							modules: true,
+							localIdentName: '[path][name]__[local]--[hash:base64:5]'
+						}
+					},{
+						loader:"postcss-loader"
+					}]
 				})
 			},{//处理scss
 				test: /\.scss$/,
 				include:[path.resolve(__dirname,"../src/")],
 				use: scss_extract.extract({
 					fallback: "style-loader",
-					use: ["css-loader","postcss-loader","sass-loader"]
+					use:[{
+						loader:"css-loader",
+						options: {//模块化css
+							modules: true,
+							localIdentName: '[path][name]__[local]--[hash:base64:5]'
+						}
+					},{
+						loader:"postcss-loader"
+					},{
+						loader:"sass-loader"
+					}]
 				})
 			},{//处理图片,####超过尺寸会使用file-loader，所以记得下载
 				test:/\.(png|jpe?g|gif|svg)(\?.*)?$/,

@@ -1,8 +1,13 @@
-import "../css/index.scss";
+import css from "../static/reset.css";
+import Index from './index/index.jsx'
+
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 
-import component from './index.jsx'
-	
 
-console.log(`process.env.NODE_ENV是区分环境的全局环境变量：${process.env.NODE_ENV}`);
+
+ReactDOM.render(
+	<Index />,
+	document.getElementById('app')
+	);
+
