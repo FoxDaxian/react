@@ -1,4 +1,7 @@
 //可以导出变量，比如导出一个类名，就不用再js中声明了
 .wrap{
 	color:green;
+	font-size: 50px;
+	user-select:none;
+	cursor: default;
 }

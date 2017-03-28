@@ -1,4 +1,6 @@
 import css from "../static/reset.css";
+
+
 import Index from './index/index.jsx'
 
 import React from 'react';
