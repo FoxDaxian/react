@@ -1,7 +1,7 @@
 {
-  "name": "webpack_with_doc",
+  "name": "react",
   "version": "1.0.0",
-  "description": "从0开始的webpack啃文档生活",
+  "description": "从0开始的react啃文档生活",
   "main": "index.js",
   "scripts": {
     "build": "node node_todo/build.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/a13821190779/webpack_with_doc.git"
+    "url": "git+https://github.com/a13821190779/react.git"
   },
   "keywords": [],
   "author": "watermelon",

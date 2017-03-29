@@ -54,7 +54,7 @@ module.exports = {
 				}
 			},{//处理css不带css-module
 				test: /\.css$/,
-				exclude:[path.resolve(__dirname,"../src/")],
+				include:[path.resolve(__dirname,"../src/static/")],
 				use: css_extract.extract({
 					fallback: "style-loader",
 					use:[{
@@ -65,7 +65,7 @@ module.exports = {
 				})
 			},{//处理scss不带css-module
 				test: /\.scss$/,
-				exclude:[path.resolve(__dirname,"../src/")],
+				include:[path.resolve(__dirname,"../src/static/")],
 				use: scss_extract.extract({
 					fallback: "style-loader",
 					use:[{
@@ -78,7 +78,7 @@ module.exports = {
 				})
 			},{//处理css
 				test: /\.css$/,
-				include:[path.resolve(__dirname,"../src/")],
+				exclude:[path.resolve(__dirname,"../src/static/")],//根据优先级
 				use: css_extract.extract({
 					fallback: "style-loader",
 					use:[{
@@ -96,7 +96,7 @@ module.exports = {
 				})
 			},{//处理scss
 				test: /\.scss$/,
-				include:[path.resolve(__dirname,"../src/")],
+				exclude:[path.resolve(__dirname,"../src/static/")],//根据优先级
 				use: scss_extract.extract({
 					fallback: "style-loader",
 					use:[{
