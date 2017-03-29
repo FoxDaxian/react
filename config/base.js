@@ -52,6 +52,30 @@ module.exports = {
 				use: {
 					loader: 'babel-loader'
 				}
+			},{//处理css不带css-module
+				test: /\.css$/,
+				exclude:[path.resolve(__dirname,"../src/")],
+				use: css_extract.extract({
+					fallback: "style-loader",
+					use:[{
+						loader:"css-loader"
+					},{
+						loader:"postcss-loader"
+					}]
+				})
+			},{//处理scss不带css-module
+				test: /\.scss$/,
+				exclude:[path.resolve(__dirname,"../src/")],
+				use: scss_extract.extract({
+					fallback: "style-loader",
+					use:[{
+						loader:"css-loader"
+					},{
+						loader:"postcss-loader"
+					},{
+						loader:"sass-loader"
+					}]
+				})
 			},{//处理css
 				test: /\.css$/,
 				include:[path.resolve(__dirname,"../src/")],
