@@ -10,6 +10,8 @@ export default class Index extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			com_onoff:true,
+			son_text:"一段测试文字",
 			todolist: [],
 			css_ani:false,
 			text:"关闭",
@@ -53,7 +55,6 @@ export default class Index extends React.Component {
 
 
 	prod_el( data ){
-		console.log("被render了");
 		let result = [];
 		data.forEach( ( el, i ) => {
 			result.push(<div className="list" key={i}>{el}</div>);
@@ -62,6 +63,12 @@ export default class Index extends React.Component {
 	}
 
 	ani_start(){
+		this.setState({
+			son_text:Math.random()
+		});
+		this.setState({
+			son_text:Math.random()
+		});
 		this.state.css_ani = !this.state.css_ani;
 		this.state.text = !!this.state.css_ani ? "开启" : "关闭";
 		this.setState({
@@ -71,6 +78,20 @@ export default class Index extends React.Component {
 				ani_div:true
 			})
 		});
+	}
+
+	show_com(){
+		this.setState({
+			com_onoff:!this.state.com_onoff
+		});
+	}
+
+	add_component(){
+		if( this.state.com_onoff ){
+			return <Component>{this.state.son_text}</Component>
+		}else{
+			return null
+		}
 	}
 
 
@@ -83,7 +104,8 @@ export default class Index extends React.Component {
 			<div className="todolist_wrap">{this.prod_el(this.state.todolist)}</div>
 			<div className={this.state.ani_class}>动画</div>
 			<button onClick={e => this.ani_start(e)}>{this.state.text}</button>
-			<Component />
+			{this.add_component()}
+			<button onClick={e => this.show_com(e)}>是否显示组件</button>
 			</div>
 			);
 	}
