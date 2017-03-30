@@ -8,7 +8,6 @@ import ReactDOM from 'react-dom';
 import css3 from '../static/common.scss'
 
 
-
 ReactDOM.render(
 	<Index />,
 	document.getElementById('app')

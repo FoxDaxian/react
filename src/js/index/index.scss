@@ -1,6 +1,6 @@
 //可以导出变量，比如导出一个类名，就不用再js中声明了
 .wrap{
-	:global{//不加以解析的类名，放在:global里
+	:global{//不想解析的类名，放在:global里
 		.btn{
 			width: 200px;
 			height: 50px;
@@ -20,5 +20,18 @@
 			border:1px solid #000;
 			box-sizing: border-box;
 		}
+		.ani_div{
+			width: 50px;
+			height: 50px;
+			background-color: yellowgreen;
+			line-height: 50px;
+			text-align: center;
+			transition:1s;
+			left: 0;
+			position: relative;
+		}
 	}
+}
+.ani{
+	left: 100px!important;
 }

@@ -3,12 +3,20 @@ import ReactDOM from 'react-dom';
 import classnames from 'classnames'//扩展css
 import css from  './index.scss';
 
+import Component from '../component1/component1.jsx'
+
 
 export default class Index extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			todolist: []
+			todolist: [],
+			css_ani:false,
+			text:"关闭",
+			ani_class:classnames({
+				[css.ani]:this.css_ani,
+				ani_div:true
+			})
 		};
 		this.prod_el = this.prod_el.bind(this);
 	}
@@ -17,9 +25,13 @@ export default class Index extends React.Component {
 		name: React.PropTypes.string,
 	};
 
+	componentDidMount() {
+		this.input.focus();
+	}
+
 	push(){
-		this.state.todolist.unshift(this.input.value);
 		if( this.input.value !== "" ){
+			this.state.todolist.unshift(this.input.value);
 			this.setState({
 				todolist:this.state.todolist
 			},function() {
@@ -31,7 +43,15 @@ export default class Index extends React.Component {
 			console.log("空了");
 		}
 	}
-	
+
+	keyup(e){
+		let ev = e || window.event;
+		if( ev.keyCode === 13 ){
+			this.push();
+		}
+	}
+
+
 	prod_el( data ){
 		console.log("被render了");
 		let result = [];
@@ -41,14 +61,29 @@ export default class Index extends React.Component {
 		return result;
 	}
 
+	ani_start(){
+		this.state.css_ani = !this.state.css_ani;
+		this.state.text = !!this.state.css_ani ? "开启" : "关闭";
+		this.setState({
+			css_ani:this.state.css_ani,
+			ani_class:classnames({
+				[css.ani]:this.state.css_ani,
+				ani_div:true
+			})
+		});
+	}
+
 
 
 	render() {
 		return (
 			<div className={css.wrap}>
-			<input ref={el => this.input = el }  className="input" type="text"/>
+			<input ref={el => this.input = el }  className="input" onKeyUp={e => this.keyup(e)} type="text"/>
 			<button  className="btn" onClick={e=>this.push(e)}>点击</button>
 			<div className="todolist_wrap">{this.prod_el(this.state.todolist)}</div>
+			<div className={this.state.ani_class}>动画</div>
+			<button onClick={e => this.ani_start(e)}>{this.state.text}</button>
+			<Component />
 			</div>
 			);
 	}
