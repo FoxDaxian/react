@@ -1,111 +1,35 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import classnames from 'classnames'//扩展css
-import css from  './index.scss';
+import { withRouter } from 'react-router'
 
-import Component from '../component1/component1.jsx'
+import Com2 from '../component2/component2.jsx'
+import Com3 from '../component3/component3.jsx'
 
+import {
+	BrowserRouter as Router,
+	Route,
+	Link
+} from 'react-router-dom'
 
 export default class Index extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			com_onoff:true,
-			son_text:"一段测试文字",
-			todolist: [],
-			css_ani:false,
-			text:"关闭",
-			ani_class:classnames({
-				[css.ani]:this.css_ani,
-				ani_div:true
-			})
-		};
-		this.prod_el = this.prod_el.bind(this);
-	}
-
 	static propTypes = {
 		name: React.PropTypes.string,
 	};
 
-	componentDidMount() {
-		this.input.focus();
+	constructor(props) {
+		super(props);
 	}
 
-	push(){
-		if( this.input.value !== "" ){
-			this.state.todolist.unshift(this.input.value);
-			this.setState({
-				todolist:this.state.todolist
-			},function() {
-				this.input.value = "";
-				this.input.focus();
-				console.log(this.state.todolist);
-			});
-		}else{
-			console.log("空了");
-		}
+	show_state(){
+		console.log(this.state);
 	}
-
-	keyup(e){
-		let ev = e || window.event;
-		if( ev.keyCode === 13 ){
-			this.push();
-		}
-	}
-
-
-	prod_el( data ){
-		let result = [];
-		data.forEach( ( el, i ) => {
-			result.push(<div className="list" key={i}>{el}</div>);
-		});
-		return result;
-	}
-
-	ani_start(){
-		this.setState({
-			son_text:Math.random()
-		});
-		this.setState({
-			son_text:Math.random()
-		});
-		this.state.css_ani = !this.state.css_ani;
-		this.state.text = !!this.state.css_ani ? "开启" : "关闭";
-		this.setState({
-			css_ani:this.state.css_ani,
-			ani_class:classnames({
-				[css.ani]:this.state.css_ani,
-				ani_div:true
-			})
-		});
-	}
-
-	show_com(){
-		this.setState({
-			com_onoff:!this.state.com_onoff
-		});
-	}
-
-	add_component(){
-		if( this.state.com_onoff ){
-			return <Component>{this.state.son_text}</Component>
-		}else{
-			return null
-		}
-	}
-
-
 
 	render() {
+		const { match, location, history } = this.props
+		console.log(location.state);
 		return (
-			<div className={css.wrap}>
-			<input ref={el => this.input = el }  className="input" onKeyUp={e => this.keyup(e)} type="text"/>
-			<button  className="btn" onClick={e=>this.push(e)}>点击</button>
-			<div className="todolist_wrap">{this.prod_el(this.state.todolist)}</div>
-			<div className={this.state.ani_class}>动画</div>
-			<button onClick={e => this.ani_start(e)}>{this.state.text}</button>
-			{this.add_component()}
-			<button onClick={e => this.show_com(e)}>是否显示组件</button>
+			<div>
+				<button onClick={e => this.show_state(e)}>显示state</button>
+				<h3>ID: {match.params.id}</h3>
 			</div>
 			);
 	}
