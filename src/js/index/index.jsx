@@ -15,17 +15,23 @@ export default class Index extends React.Component {
 		name: React.PropTypes.string,
 	};
 
+	static defaultProps = {
+		name:"冯世雨"
+	}
+
 	constructor(props) {
 		super(props);
 	}
 
 	show_state(){
-		console.log(this.state);
+		console.log(this.props);
 	}
 
 	render() {
 		const { match, location, history } = this.props
-		console.log(location.state);
+		console.log(match);
+		console.log(location);
+		console.log(history);
 		return (
 			<div>
 				<button onClick={e => this.show_state(e)}>显示state</button>

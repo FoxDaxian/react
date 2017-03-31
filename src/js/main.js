@@ -17,14 +17,15 @@ render((<Router>
 			<ul>
 				<li><Link to={{
 					pathname: '/login',
-				      state: { from:"测试" }
+				    state: { from:"测试" },
+				    props:{sex:"男人"}
 				}}>Index</Link></li>
 				<li><Link to="/aa">Com1</Link></li>
 			</ul>
 
 			<hr/>
 
-			<Route path="/:id" component={Index}  />
+			<Route path="/:id" component={Index} />
 		</div>
 	</Router>),document.getElementById('app'));
 
