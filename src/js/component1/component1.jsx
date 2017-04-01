@@ -1,27 +1,23 @@
 import React from 'react';
-import css from './component1.scss'
+import css from "./component1.scss";
 
-export default class Component extends React.Component {
+export default class Component1 extends React.Component {
 	static propTypes = {
 		name: React.PropTypes.string,
 	};
-
-	componentDidMount() {
-		this.btn.addEventListener('click', function(e) {
-			console.log(1);
-		});
-	}
-
 
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
+		const { history:h, location:l, match:m } = this.props;
+		console.log(h);
+		console.log(l);
+		console.log(m);
 		return (
 			<div className={css.wrap}>
-			<p>组件1</p>
-			<button ref={e => this.btn = e}>点击</button>
+				组件1
 			</div>
 			);
 	}

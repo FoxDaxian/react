@@ -1,5 +1,5 @@
 import React from 'react';
-import css from './component3.scss'
+import css from "./component3.scss";
 
 export default class Component3 extends React.Component {
 	static propTypes = {
@@ -12,7 +12,9 @@ export default class Component3 extends React.Component {
 
 	render() {
 		return (
-			<div className={css.wrap}>组件3</div>
+			<div className={css.wrap}>
+				组件3
+			</div>
 			);
 	}
 }

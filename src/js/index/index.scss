@@ -1,7 +1,16 @@
 //可以导出变量，比如导出一个类名，就不用再js中声明了
 .wrap{
-	color:red;
-	:global{//不想解析的类名，放在:global里
-		
+	:global{//不想解析的###类名###，放在:global里
+		.view{
+			border:1px solid red;
+			margin: 20px 0;
+			font-size: 50px;
+		}
+	}
+	ul{
+		font-size: 40px;		
+		li{
+			margin:20px;
+		}
 	}
 }
