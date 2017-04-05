@@ -12,9 +12,6 @@ export default class Component1 extends React.Component {
 
 	render() {
 		const { history:h, location:l, match:m } = this.props;
-		console.log(h);
-		console.log(l);
-		console.log(m);
 		return (
 			<div className={css.wrap}>
 				组件1

@@ -7,7 +7,7 @@ import { render } from 'react-dom'
 import Index from './index/index.jsx'
 
 render((
-		<Index />
-		),document.getElementById('app'));
+	<Index />
+), document.getElementById('app'));
 
 
