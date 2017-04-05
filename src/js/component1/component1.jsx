@@ -14,7 +14,7 @@ export default class Component1 extends React.Component {
 		const { history:h, location:l, match:m } = this.props;
 		return (
 			<div className={css.wrap}>
-				组件1
+				<h1>我是组件1</h1>
 			</div>
 			);
 	}

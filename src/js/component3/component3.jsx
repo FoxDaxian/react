@@ -13,7 +13,7 @@ export default class Component3 extends React.Component {
 	render() {
 		return (
 			<div className={css.wrap}>
-				组件3
+				<h1>我是组件3</h1>
 			</div>
 			);
 	}
