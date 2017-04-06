@@ -8,6 +8,8 @@ const opn = require("opn");
 //引入webpack的base配置
 const dev_config = require("../config/webpack.dev.js");
 
+//express重定向
+const history = require('connect-history-api-fallback');
 
 //定义环境变量以区分开发和生产
 process.env.NODE_ENV = "development";
@@ -16,10 +18,12 @@ process.env.NODE_ENV = "development";
 const app = express();
 const compiler = webpack(dev_config);
 
+app.use(history());//要在中间件之前使用（位置很重要）....，还可以配置参数选项哦：参考https://github.com/bripkens/connect-history-api-fallback
+
 //使用webpack-dev-middleware
-app.use(webpackDevMiddleware(compiler,{
-	publicPath:"/",
-	stats:{//详细配置见：https://doc.webpack-china.org/configuration/stats/
+app.use(webpackDevMiddleware(compiler, {
+	publicPath: "/",
+	stats: {//详细配置见：https://doc.webpack-china.org/configuration/stats/
 		colors: true,
 		chunks: false,//少显示点东西，看着干净
 	}
@@ -38,6 +42,7 @@ compiler.plugin('compilation', function (compilation) {
 	});
 });
 
+
 //express  调用 webpack-hot-middleware
 app.use(hotMiddleware);
 
@@ -47,8 +52,8 @@ app.use(express.static(require("path").resolve(__dirname, '../')));
 
 //设置监听端口
 const port = new Date().getFullYear();
-app.listen(port,function( err ) {
-	if( err ){
+app.listen(port, function (err) {
+	if (err) {
 		console.log(err);
 		return false;
 	}
