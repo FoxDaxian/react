@@ -6,6 +6,7 @@ const webpackMerge = require('webpack-merge');
 //引入通用配置
 const base_config = require("./base.js");
 
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');//生成html
 
 process.noDeprecation = true; //去除一个现在无关紧要的警告
