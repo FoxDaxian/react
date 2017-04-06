@@ -1,74 +1,106 @@
 import React, { PropTypes } from 'react';
-
-import Com1 from '../component1/component1.jsx';
-import Com2 from '../component2/component2.jsx';
-import Com3 from '../component3/component3.jsx';
 import {
 	BrowserRouter as Router,
 	Route,
-	Link
-} from "react-router-dom";
+	Link,
+	Redirect,
+	withRouter
+} from 'react-router-dom'
 
-const grandson1 = () => (
-	<div>
-		<h2>孙子1</h2>
-	</div>
-)
-const grandson2 = () => (
-	<div>
-		<h2>孙子2</h2>
-	</div>
-)
-const grandson3 = () => (
-	<div>
-		<h2>孙子3</h2>
-	</div>
-)
 
-const Topic = ( props ) => {
-	console.log(props);
-	return(
-		<div>
-			<h3>{props.match.params.gs_id}</h3>
-		</div>
-	)
+
+const fakeAuth = {
+	isAuthenticated: false,
+	authenticate(cb) {
+		this.isAuthenticated = true;
+		setTimeout(cb, 100);
+	},
+	signout(cb) {
+		this.isAuthenticated = false;
+		setTimeout(cb, 100);
+	}
 }
 
-const Third_route = ({ match }) => (
-	<Router>
-		<div>
-			<div>
-				<Link to={`${match.url}/gr1`}>孙子1</Link>
-				<Link to={`${match.url}/gr2`}>孙子2</Link>
-				<Link to={`${match.url}/gr3`}>孙子3</Link>
-			</div>
-			<Route path={`${match.url}/:gs_id`} component={Topic}></Route>
-			<Route exact path={`${match.url}`} render={
-				() => (
-					<div>孙子的主页</div>
-				)
-			}></Route>
-		</div>
-	</Router>
+const AuthButton = withRouter(({ history }) => (
+	fakeAuth.isAuthenticated ? (
+		<p>
+			欢迎! <button onClick={() => {
+				fakeAuth.signout(() => history.push('/'))
+			}}>登出</button>
+		</p>
+	) : (
+			<p>请先登录</p>
+		)
+))
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+	<Route {...rest} render={props => (
+		fakeAuth.isAuthenticated ? (
+			<Component {...props} />
+		) : (
+				<Redirect to={{
+					pathname: '/login',
+					state: { from: props.location }
+				}} />
+			)
+	)} />
 )
 
-export class Index extends React.Component {
+const Public = () => <h3>公开的页面</h3>
+const Protected = () => <h3>非公开的页面</h3>
+
+class Login extends React.Component {
+	state = {
+		redirectToReferrer: false
+	}
+
+	login = () => {
+		fakeAuth.authenticate(() => {
+			this.setState({ redirectToReferrer: true })
+		})
+	}
+
+	render() {
+		const { from } = this.props.location.state || { from: { pathname: '/' } }
+		const { redirectToReferrer } = this.state
+
+		if (redirectToReferrer) {
+			return (
+				<Redirect to={from} />
+			)
+		}
+
+		return (
+			<div>
+				<p>若想访问 {from.pathname} ，你需要先登录</p>
+				<button onClick={this.login}>登录</button>
+			</div>
+		)
+	}
+}
+
+
+
+
+class Index extends React.Component {
 	constructor(props, context) {
 		super(props, context);
+
+
 	}
 
 	render() {
 		return (
 			<Router>
 				<div>
-					<div>
-						<Link to="/">第一个路由</Link>
-						<Link to="/com1">第二个路由</Link>
-						<Link to="/com2">第三个路由</Link>
-					</div>
-					<Route exact path="/" component={Com1}></Route>
-					<Route path="/com1" component={Com2}></Route>
-					<Route path="/com2" component={Third_route}></Route>
+					<AuthButton />
+					<ul>
+						<li><Link to="/public">公开页面</Link></li>
+						<li><Link to="/protected">非公开页面</Link></li>
+					</ul>
+					<Route path="/public" component={Public} />
+					<Route path="/login" component={Login} />
+					<PrivateRoute path="/protected" component={Protected} />
 				</div>
 			</Router>
 		);
