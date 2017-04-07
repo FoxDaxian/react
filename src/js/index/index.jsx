@@ -3,63 +3,64 @@ import {
 	BrowserRouter as Router,
 	Route,
 	Link,
-	Prompt
+	Switch,
+	Redirect
 } from "react-router-dom";
 
-const Com1 = () => {
-	return (
-		<div>组件1</div>
-	)
-}
-const Com2 = () => {
-	return (
-		<div>组件2</div>
-	)
-}
+const Home = () => (
+	<p>
+		<code> &lt;Switch> </code>会渲染它里面的第一个可以匹配的
+    <code> &lt;Route> </code>，而且一个没有<code> path </code>的
+    <code> &lt;Route> </code> 会满足任何匹配。
+	</p>
+)
 
-const Com3 = () => {
-	return (
-		<div>组件3</div>
-	)
-}
+const WillMatch = () => <h3>匹配到了！</h3>
 
-const Like_link = ({ to, ...args_out }) => {
-	console.log(args_out);
-	return (
-		<Route path={to} children={({ ...arg }) => {
-			console.log(arg);
-			return (
-				<div>
-					{arg.match ? "yes" : "no"}<Link to={to} {...args_out}>到主页</Link>
-				</div>
-			)
-		}}></Route>
-	)
-}
-
-
-
-export class index extends React.Component {
+export class Index extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 	}
+
 	render() {
 		return (
 			<Router>
 				<div>
-					<Like_link to="/" name="冯世雨啦啦啦" />
+					<div className="links">
+						<div>
+							<Link to="/">主页</Link>
+						</div>
+						<div>
+							<Link to="/old-match">可以啊</Link>
+						</div>
+						<div>
+							<Link to="/will-match">可以啊</Link>
+						</div>
+						<div>
+							<Link to="/will-not-match">不可以</Link>
+						</div>
+						<div>
+							<Link to="/also/will/not/match">不可以</Link>
+						</div>
+					</div>
+					<Switch>
+						<Route path="/" exact component={() => <h1>主页</h1>} />
+						<Redirect from="/old-match" to="/will-match" />
+						<Route path="/will-match" component={WillMatch} />
+						<Route render={ () => <h3>我是备胎</h3>} />
+					</Switch>
 				</div>
 			</Router>
 		);
 	}
 }
 
-index.defaultProps = {
+Index.defaultProps = {
 
 };
 
-index.propTypes = {
+Index.propTypes = {
 
 };
 
-export default index;
+export default Index;
