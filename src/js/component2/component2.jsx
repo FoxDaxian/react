@@ -11,6 +11,7 @@ export default class Component2 extends React.Component {
 	}
 
 	render() {
+		console.log(this.props);
 		return (
 			<div className={css.wrap}>
 				<h1>我是组建2</h1>
