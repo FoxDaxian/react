@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom'
 
+import {ADD_TODO} from "../js/components/test.js";
+console.log(ADD_TODO);
 
 
 import { createStore, applyMiddleware } from "redux";
@@ -26,7 +28,7 @@ const store = createStore(reducer)
 
 //监听创建好的store，每次事件触发，进行回调
 store.subscribe(() => {
-	console.log(store.getState())
+	// console.log(store.getState())
 })
 
 //分发动作，触发中间处理者，然后触发订阅
