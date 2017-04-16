@@ -2,21 +2,20 @@ import React from 'react';
 import { render } from 'react-dom'
 
 //引入组件
-import View from "./components/view.jsx";
+import ToDoList from "./components/function.jsx";
 
-import store from "../js/store";//引入
-import { createStore } from "redux";
+import main_store from "../js/store";//引入
+const {store,mapStateToProps,mapDispatchToProps} = main_store
 import { Provider, connect } from 'react-redux'
 
 const App = connect(
-	store.mapStateToProps,
-	store.mapDispatchToProps
-)(View)
-
+	mapStateToProps,
+	mapDispatchToProps
+)(ToDoList)
 
 
 render(
-	<Provider store={store.store}>
+	<Provider store={store}>
 		<App />
 	</Provider>,
 	document.getElementById('app')

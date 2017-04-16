@@ -1,0 +1,26 @@
+.wrap {
+     :global {
+        .todolist {
+            border: 1px solid red;
+            .todolist_wrap {
+                margin: 10px;
+                overflow: hidden;
+                >div {
+                    float: left;
+                }
+                .name {
+                    &:hover {
+                        background-color: greenyellow;
+                    }
+                }
+                .isComplete {
+                    margin-left: 50px;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: greenyellow;
+                    }
+                }
+            }
+        }
+    }
+}

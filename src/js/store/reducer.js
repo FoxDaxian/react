@@ -1,14 +1,33 @@
 import { initState } from "./initState.js";
 function reducer(state = initState, action) {
-    const temp = Object.assign({}, state);
     switch (action.type) {
-        case "increase":
-            temp.count++;
+        case "addtodo":
+            const tempDate = prompt("请输入代办事项");
+            if (tempDate === null) {
+                return state;
+            }
+            return {
+                todo: [
+                    ...state.todo,
+                    {
+                        name: tempDate,
+                        isComplete: false
+                    }
+                ]
+            }
             break;
-        case "changename":
-            temp.name = "朱丽"
+        case "changetodo":
+            return {
+                todo:state.todo.map((el, i) => {
+                    if (i === action.index) {
+                        return Object.assign({}, el, { isComplete: !el.isComplete });
+                    }
+                    return el;
+                })
+            }
             break;
+        default:
+            return state;
     }
-    return temp;
 }
 export default reducer;
