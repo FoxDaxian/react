@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+
+
 class Home extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.change_todo = this.props.changetodo;
     }
     change(e, index) {
         this.change_todo(index);
     }
     render() {
-        const { ToDoDate, add } = this.props;
+        const { todo, add } = this.props;
         return (
             <div>
                 {
-                    ToDoDate.map((el, i) => {
+                    todo.map((el, i) => {
                         return (
                             <div key={i}>
                                 <div>{el.name}</div>
