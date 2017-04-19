@@ -14,13 +14,9 @@ const BookList = () => (
 
 
 
-
-
-
-
 class ShowPage extends Component {
     componentDidMount() {
-        // BookList(() => { })
+        BookList()
     }
 
     render() {

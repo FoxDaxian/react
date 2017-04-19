@@ -25,7 +25,7 @@ const AsynShow = () => (
 
 class IndexPage extends Component {
   componentDidMount() {
-    AsynShow(() => { })
+    AsynShow()
   }
   render() {
     return (
