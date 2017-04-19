@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import RouteLoop from "../../router_config/loop.jsx";
 
+import Bundle from "../../for_codeSplit.jsx";
+
+import MyShow from 'bundle-loader?lazy!./components/show1/show1.jsx'
+
+const BookList = () => (
+    <Bundle load={MyShow}>
+        {(BookList) => <BookList />}
+    </Bundle>
+)
+
+
+
+
+
+
+
 class ShowPage extends Component {
+    componentDidMount() {
+        // BookList(() => { })
+    }
+
     render() {
         const { routes } = this.props;
         return (
             <div>
                 展示页<br />
                 <Link to="/">回到首页</Link>
-                <div>
-                    {
-                        routes.map((routes_config, index) => {
-                            return <RouteLoop key={index} {...routes_config}></RouteLoop>
-                        })
-                    }
-                </div>
+
+                <Route path="/show/show1" component={BookList}></Route>
+
                 <div>
                     <Link to="/show/show1">show1</Link>
-                    <br/>
-                    <Link to="/show/show2">show2</Link>
                 </div>
             </div>
         );

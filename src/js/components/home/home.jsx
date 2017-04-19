@@ -5,13 +5,9 @@ import { Link } from "react-router-dom";
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.change_todo = this.props.changetodo;
-    }
-    change(e, index) {
-        this.change_todo(index);
     }
     render() {
-        const { todo, add } = this.props;
+        const { todo, add, changetodo } = this.props;
         return (
             <div>
                 {
@@ -19,7 +15,7 @@ class Home extends Component {
                         return (
                             <div key={i}>
                                 <div>{el.name}</div>
-                                <div onClick={(e) => this.change(e,i)}>{el.isComplete ? "完成了" : "没完成"}</div>
+                                <div onClick={changetodo.bind(null, i)}>{el.isComplete ? "完成了" : "没完成"}</div>
                             </div>
                         )
                     })

@@ -6,7 +6,7 @@ class RouteLoop extends Component {
     render() {
         const { path, exact, routes, component: Component,...rest } = this.props;
         return (
-            <Route path={path} exact={exact}  render={(props) => {
+            <Route path={path} exact={exact}   render={(props) => {
                 return (<Component {...props} {...rest} routes={routes/*传入下一个路由配置对象*/} />)
             }} />
         );
