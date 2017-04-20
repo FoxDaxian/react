@@ -53,11 +53,7 @@ module.exports = {
 			exclude: /(node_modules)/,
 			include: path.join(__dirname, '../src'),
 			use: {
-				loader: 'babel-loader',
-				options: {
-					"presets": [["es2015", { modules: false }], "stage-0", "react"],
-					"plugins": ["transform-class-properties", "transform-decorators-legacy", "syntax-dynamic-import"]
-				}
+				loader: 'babel-loader'
 			}
 		}, {//处理css不带css-module
 			test: /\.css$/,

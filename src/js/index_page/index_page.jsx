@@ -26,18 +26,10 @@ class IndexPage extends Component {
           <div>
             <Route path="/" exact component={Home}></Route>
 
-            <Route path="/show"  render={(props) => (
+            <Route path="/show" render={(props) => (
               <LazyBundle {...props} img={System.import("../../static/img14.jpg")} component={System.import("../components/show_page/show_page.jsx")}></LazyBundle>
             )}></Route>
-
-            <Route path="/show/show1"  render={(props) => (
-              <LazyBundle {...props} component={System.import("../components/show_page/components/show1/show1.jsx")}></LazyBundle>
-            )}></Route>
-
-            <Route path="/show/show2"  render={(props) => (
-              <LazyBundle {...props} component={System.import("../components/show_page/components/show2/show2.jsx")}></LazyBundle>
-            )}></Route>
-
+            <Route path="*" render={(props) => (<div>404  not found</div>)}></Route>
           </div>
         </Router>
       </div>

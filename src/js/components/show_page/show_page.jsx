@@ -23,7 +23,16 @@ class ShowPage extends Component {
                 <Link to="/"><h2>主页</h2></Link>
                 <Link to="/show/show1"><h2>show1</h2></Link>
                 <Link to="/show/show2"><h2>show2</h2></Link>
-                <img src={this.state.img} alt="" />
+                <img width="50" src={this.state.img} alt="" />
+
+
+                <Route path="/show/show1" render={(props) => (
+                    <LazyBundle {...props} component={System.import("../show_page/components/show1/show1.jsx")}></LazyBundle>
+                )}></Route>
+
+                <Route path="/show/show2" render={(props) => (
+                    <LazyBundle {...props} component={System.import("../show_page/components/show2/show2.jsx")}></LazyBundle>
+                )}></Route>
 
             </div>
         );
