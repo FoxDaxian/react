@@ -1,36 +1,30 @@
 import React, { Component } from 'react';
 import { Link, Route } from "react-router-dom";
-import RouteLoop from "../../router_config/loop.jsx";
-
-import Bundle from "../../for_codeSplit.jsx";
-
-import MyShow from 'bundle-loader?lazy!./components/show1/show1.jsx'
-
-const BookList = () => (
-    <Bundle load={MyShow}>
-        {(BookList) => <BookList />}
-    </Bundle>
-)
-
-
-
+import LazyBundle from "../../util/lazybundle.jsx";
 class ShowPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            img: null
+        };
+    }
     componentDidMount() {
-        BookList()
+        this.props.img.then((img) => {
+            this.setState((prevState, props) => {
+                prevState.img = img
+            });
+        });
     }
 
     render() {
-        const { routes } = this.props;
         return (
             <div>
-                展示页<br />
-                <Link to="/">回到首页</Link>
+                <h1>showpage页面</h1>
+                <Link to="/"><h2>主页</h2></Link>
+                <Link to="/show/show1"><h2>show1</h2></Link>
+                <Link to="/show/show2"><h2>show2</h2></Link>
+                <img src={this.state.img} alt="" />
 
-                <Route path="/show/show1" component={BookList}></Route>
-
-                <div>
-                    <Link to="/show/show1">show1</Link>
-                </div>
             </div>
         );
     }

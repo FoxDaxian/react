@@ -21,12 +21,7 @@ let config = webpackMerge(base_config, {
 	module: {
 		rules: [
 			{
-				test: /src\\js\\components(\\.*).js[x]?$/,
-				include: [path.resolve(__dirname, "../src/js/components")],
-				use: [
-					'bundle-loader?lazy',
-					"babel-loader"
-				],
+				
 			}
 		]
 	},

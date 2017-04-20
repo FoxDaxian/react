@@ -1,3 +1,3 @@
 module.exports  = {
-    prod_publicPath:"./"
+    prod_publicPath:"/"
 }
