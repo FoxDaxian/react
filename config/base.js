@@ -19,10 +19,10 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");//提取出css�
 
 //因为从js中分离出css的话，被分离出的js 和 分离出的css的 hash一样，以js为准，所以使用contenthash，[contenthash] 是 extract-text-webpack-plugin提供的另一种hash值，意为：文本内容的hash值，用来区分js文件的hash值
 const css_extract = new ExtractTextPlugin({
-	filename: "static/css/css.[contenthash].css"
+	filename: "static/css/css.[contenthash:5].css"
 });
 const scss_extract = new ExtractTextPlugin({
-	filename: "static/css/scss.[contenthash].css"
+	filename: "static/css/scss.[contenthash:5].css"
 });
 
 //压缩css
@@ -52,9 +52,9 @@ module.exports = {
 			test: /\.js[x]?$/,
 			exclude: /(node_modules)/,
 			include: path.join(__dirname, '../src'),
-			use: {
-				loader: 'babel-loader'
-			}
+			use: [
+				{loader: 'babel-loader'}
+			]
 		}, {//处理css不带css-module
 			test: /\.css$/,
 			include: [path.resolve(__dirname, "../src/static/")],
@@ -120,7 +120,7 @@ module.exports = {
 				loader: "url-loader",
 				options: {
 					limit: 10000,
-					name: "static/img/[name].[hash].[ext]"
+					name: "static/img/[name].[hash:5].[ext]"
 				}
 			}]
 
@@ -130,7 +130,7 @@ module.exports = {
 				loader: "url-loader",
 				options: {
 					limit: 10000,
-					name: "static/fonts/[name].[hash].[ext]"
+					name: "static/fonts/[name].[hash:5].[ext]"
 				}
 			}]
 		}, {//处理写在html中的图片

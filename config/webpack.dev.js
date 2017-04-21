@@ -12,7 +12,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');//生成html
 process.noDeprecation = true; //去除一个现在无关紧要的警告
 
 //把入口文件改为数组，并添加上iddleware/client?noInfo=true&reload=true，否则webpack-hot-middleware不会起作用
-var devClient = "./config/dev-client.js";//使用个人设置的配置文件
+const devClient = "./config/dev-client.js";//使用个人设置的配置文件
 for( let key in base_config.entry ){
 	base_config.entry[key] = [devClient].concat(base_config.entry[key]);
 }
@@ -27,7 +27,7 @@ const config =  webpackMerge(base_config, {
  		]
  	},
  	plugins: [
- 		//hot-middleware需要的
+ 		// 开启全局的模块热替换(HMR)
  		new webpack.HotModuleReplacementPlugin(),
  		new webpack.NoEmitOnErrorsPlugin(),
  		//需要有一个html文件指向你的生成的dist，所以使用HtmlWebpackPlugin

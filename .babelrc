@@ -1,4 +1,17 @@
 {
-"presets": [[ "es2015", { "modules": false } ],"stage-0","react"],
-"plugins": ["transform-async-to-generator","transform-class-properties","transform-decorators-legacy","syntax-dynamic-import"]
+    "presets": [
+        [
+            "es2015",
+            {
+                "modules": false
+            }
+        ],
+        "stage-0",
+        "react"
+    ],
+    "plugins": [
+        "transform-class-properties",
+        "transform-decorators-legacy",
+        "syntax-dynamic-import"
+    ]
 }

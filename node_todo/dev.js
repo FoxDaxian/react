@@ -22,7 +22,6 @@ app.use(history());//要在中间件之前使用（位置很重要）....，还�
 
 //使用webpack-dev-middleware
 app.use(webpackDevMiddleware(compiler, {
-	publicPath: "/",
 	stats: {//详细配置见：https://doc.webpack-china.org/configuration/stats/
 		colors: true,
 		chunks: false,//少显示点东西，看着干净
@@ -43,7 +42,7 @@ compiler.plugin('compilation', function (compilation) {
 });
 
 
-//express  调用 webpack-hot-middleware
+//express  调用 热替换webpack-hot-middleware,
 app.use(hotMiddleware);
 
 //通过express.static来设置静态资源路径,express服务，会通过该路径查找资源
