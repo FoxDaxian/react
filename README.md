@@ -13,12 +13,12 @@
 
 ### 目前状态
 
-    [x]react-router4
-    [x]redux
-    [x]fetch
-    [x]css-module（处理css局部化
-    [x]prop-types来进行类型属性类型检测
-    [x]路由动画（类似于vue-transittion
-    [x]npm run dev | npm run build
-    [x]热替换，热刷新，路由按需加载
-    [x]使用最新的api兼容就浏览器需要ployfill
+- [x] react-router4  
+- [x] redux  
+- [x] fetch  
+- [x] css-module（处理css局部化  
+- [x] prop-types来进行类型属性类型检测  
+- [x] 路由动画（类似于vue-transittion  
+- [x] npm run dev | npm run build  
+- [x] 热替换，热刷新，路由按需加载  
+- [x] 使用最新的api兼容就浏览器需要ployfill
